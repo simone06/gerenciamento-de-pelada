@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+ 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+ 	xmlns:p="http://primefaces.org/ui"
+ 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+ 	template="WEB-INF/template/Layout.xhtml"> 	
+
+<ui:define name="conteudo">	
+	<h:form id="frm" >
+		<p:messages id="messages" />
+		
+	<div class="container" >
+       
+        <h2>  Convida Usuários</h2>
+        
+				<p:panelGrid columns="2">
+					<p:outputLabel for="@next" value="Usuario:" />
+					<p:selectOneMenu id="usuario" value="#{peladaParticipantesBean.peladaSelecionada}" converter="peladaConverter" 
+						dynamic="true" style="width:125px">
+						<f:selectItem itemLabel="Selecione" itemValue=""/>
+						<f:selectItems var="pel"
+						itemLabel="#{pel.nomeEvento}"
+						 value="#{peladaParticipantesBean.listaPeladaCombo}" />
+						 <p:ajax event="change" process="usuario" update="@form"/>
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:spacer  height="30" />           
+               <p:dataTable id="dataTableUsuarios"  style="width:500px"
+					rows="10"
+					var="entity"
+					rowKey="#{entity.id}"
+					paginator="true"
+			        selection="#{peladaParticipantesBean.selectedListaUsuarios}"					
+					value="#{peladaParticipantesBean.listaUsuario}"					
+					rendered="#{not empty peladaParticipantesBean.listaUsuario}">								
+							
+     				<p:column width="2px" id="selectedRow" selectionMode="multiple" />  
+     				        					
+			       		<p:column headerText="Nome">
+							<h:outputText value="#{entity.nome}" />
+						</p:column>
+						<p:column headerText="Apelido">
+							<h:outputText value="#{entity.apelido}" />
+						</p:column>
+						<p:column headerText="Hora">
+							<h:outputText value="#{entity.email}" />
+						</p:column>
+                 </p:dataTable>
+                 
+                 	<p:spacer  height="30" /> 	
+
+				<p:panelGrid columns="2">
+					<p:commandButton value="Salvar" icon="ui-icon-star"
+						action="#{peladaParticipantesBean.convidarUsuarios}" update="messages">
+					</p:commandButton>
+	 
+					<p:commandButton value="Voltar" 
+						 action="menu?faces-redirect=true">
+					</p:commandButton>
+	
+				</p:panelGrid>
+		
+		</div>
+		</h:form>
+</ui:define>
+
+</ui:composition>

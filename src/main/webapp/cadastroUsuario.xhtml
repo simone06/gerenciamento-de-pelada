@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+ 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+ 	xmlns:p="http://primefaces.org/ui"
+ 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+ 	template="WEB-INF/template/Layout.xhtml">
+
+<ui:define name="conteudo">
+	
+	<h:form id="frm">
+		<p:messages id="messages" />
+		
+	<div class="container"> 
+	      <h2> Cadastrar Usuário</h2>            
+		  <p:panelGrid columns="2">             
+                <p:outputLabel for="nome" value="Nome:" />
+                <p:inputText id="nome" value="#{usuarioBean.nome}" required="true"/>
+
+                 <p:outputLabel for="apelido" value="Apelido" />
+                <p:inputText id="apelido" value="#{usuarioBean.apelido}" required="true"/>
+                
+                 <p:outputLabel for="email" value="Email:" />
+                <p:inputText id="email" value="#{usuarioBean.email}" required="true" />
+
+                <p:outputLabel for="senha" value="Senha:" />
+                <p:inputText id="senha" value="#{usuarioBean.senha}" required="true" />
+             </p:panelGrid>
+             
+             <p:spacer  height="15" />
+             
+             <p:panelGrid columns="2"> 
+                <p:commandButton  value="Cadastrar" 
+                 action="#{usuarioBean.cadastraUsuario}" update="messages">
+                </p:commandButton>
+                
+                	<p:commandButton value="Voltar" 
+						 action="menu?faces-redirect=true">
+					</p:commandButton>
+			
+             </p:panelGrid>	
+          
+      </div>    
+	</h:form>
+</ui:define>
+
+</ui:composition>

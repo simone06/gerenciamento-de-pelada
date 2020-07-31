@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="WEB-INF/template/Layout.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="frm">
+			<p:messages id="messages" />
+
+			<div class="container">
+				<h2>Cadastro de Peladas</h2>
+
+				<p:panelGrid columns="2">
+
+					<p:outputLabel for="nome" value="Nome do Evento:" />
+					<p:inputText id="nome" value="#{peladaBean.nome}" required="true"
+						maxlength="255" />
+
+					<p:outputLabel value="Data" />
+					<p:calendar locale="pt" rendered="true" label=""
+						popupIconOnly="true" showOn="button" maxlength="10" size="10"
+						value="#{peladaBean.data}" id="dataInicial"
+						styleClass="form-input ui-tj-datepicker" pattern="dd/MM/yyyy"
+						onfocus="$(this).mask('99/99/9999');" widgetVar="dataInicial"
+						title="Data Inicial">
+						<f:convertDateTime timeZone="GMT-3" pattern="dd/MM/yyyy" />
+					</p:calendar>
+
+
+					<p:outputLabel for="hora" value="Hora:" />
+					<p:inputMask id="hora" mask="99:99" value="#{peladaBean.hora}"
+						required="true" />
+
+					<p:outputLabel for="local" value="Local:" />
+					<p:inputTextarea id="local" value="#{peladaBean.local}"
+						required="true" maxlength="255" />
+				</p:panelGrid>
+				
+				 <p:spacer  height="15" />
+				
+				<p:panelGrid columns="2">
+					<p:commandButton value="Cadastrar" 
+						action="#{peladaBean.cadastrarPelada}" update="messages">
+					</p:commandButton>
+					
+			<p:commandButton value="Voltar" 
+						 action="menu?faces-redirect=true">
+					</p:commandButton>
+				</p:panelGrid>
+			</div>
+
+
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
